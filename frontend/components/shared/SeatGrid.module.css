@@ -1,0 +1,146 @@
+.wrap {
+  container-type: inline-size;
+  width: 100%;
+}
+
+.stage {
+  width: 60%;
+  margin: 0 auto var(--space-6);
+  padding: var(--space-2) 0;
+  border-radius: var(--radius-full);
+  background: var(--grey-100);
+  color: var(--grey-500);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-align: center;
+}
+
+.grid {
+  /* 12 seats + aisle + label column, sized to the container */
+  --seat: clamp(20px, calc((100cqw - 40px) / 13.6), 42px);
+  --gap: clamp(2px, calc(var(--seat) * 0.14), 6px);
+  display: grid;
+  gap: var(--gap);
+  justify-content: center;
+  transition: opacity var(--dur-base) var(--ease);
+}
+.dim {
+  opacity: var(--disabled-opacity);
+  pointer-events: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 20px repeat(6, var(--seat)) calc(var(--seat) * 0.6) repeat(6, var(--seat));
+  gap: var(--gap);
+  align-items: center;
+}
+
+.rowLabel {
+  grid-column: 1;
+  color: var(--grey-500);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.seat {
+  height: var(--seat);
+  padding: 0;
+  border: 1px solid var(--grey-200);
+  border-radius: clamp(4px, calc(var(--seat) * 0.24), 10px);
+  background: var(--white);
+  color: var(--grey-800);
+  font-size: clamp(9px, calc(var(--seat) * 0.32), 13px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+.seat:hover:not(:disabled) {
+  border-color: var(--blue-500);
+}
+.seat:disabled {
+  cursor: default;
+}
+
+/* audience: brand blue is reserved for the user's own selection */
+.seat[data-state='selected'] {
+  border-color: var(--blue-500);
+  background: var(--blue-500);
+  color: var(--white);
+}
+.seat[data-state='held'],
+.swatch[data-state='held'] {
+  border-style: dashed;
+  border-color: var(--grey-300);
+  background: var(--grey-100);
+  color: var(--grey-400);
+}
+.seat[data-state='sold'],
+.seat[data-state='refund_pending'],
+.swatch[data-state='sold'] {
+  border-color: var(--grey-200);
+  background: var(--grey-200);
+  color: var(--grey-400);
+}
+.seat[data-state='reserved'],
+.swatch[data-state='reserved'] {
+  border-color: transparent;
+  background: var(--grey-50);
+  color: var(--grey-300);
+}
+
+/* admin: booking status uses semantic washes */
+[data-mode='admin'] .seat[data-state='held'],
+[data-mode='admin'] .swatch[data-state='held'] {
+  border: 1px solid transparent;
+  background: var(--wash-orange);
+  color: oklch(0.55 0.15 50);
+}
+[data-mode='admin'] .seat[data-state='sold'],
+[data-mode='admin'] .swatch[data-state='sold'] {
+  border-color: transparent;
+  background: var(--blue-50);
+  color: var(--blue-500);
+}
+[data-mode='admin'] .seat[data-state='checked_in'],
+[data-mode='admin'] .swatch[data-state='checked_in'] {
+  border-color: transparent;
+  background: var(--wash-green);
+  color: var(--green-500);
+}
+[data-mode='admin'] .seat[data-state='available'] {
+  color: var(--grey-400);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--grey-600);
+  font-size: 13px;
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--grey-200);
+  border-radius: 4px;
+  background: var(--white);
+}
+.swatch[data-state='selected'] {
+  border-color: var(--blue-500);
+  background: var(--blue-500);
+}

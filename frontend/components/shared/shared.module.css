@@ -1,0 +1,98 @@
+/* ---------- Booking form ---------- */
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+.consent {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  background: var(--grey-50);
+}
+.consent p {
+  padding-left: 30px;
+  color: var(--fg-tertiary);
+  font-size: 13px;
+}
+.formError {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-m);
+  background: var(--wash-red);
+  color: var(--red-500);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ---------- Account box ---------- */
+.account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  background: var(--grey-100);
+}
+.accountText {
+  display: grid;
+}
+.accountText span {
+  color: var(--fg-tertiary);
+  font-size: 13px;
+}
+.accountText strong {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Privacy policy ---------- */
+.policy {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--grey-800);
+}
+.policy h3 {
+  margin: var(--space-6) 0 var(--space-2);
+  font-size: 16px;
+  font-weight: 700;
+}
+.policy p {
+  margin: var(--space-2) 0;
+}
+.policy ul {
+  margin: var(--space-2) 0;
+  padding-left: 18px;
+}
+.policy li + li {
+  margin-top: var(--space-1);
+}
+.policy table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-2) 0;
+}
+.policy th,
+.policy td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.policy th {
+  width: 32%;
+  color: var(--grey-600);
+  font-weight: 600;
+}
+.policyDate {
+  color: var(--fg-tertiary);
+  font-size: 13px;
+}
+.policyNote {
+  padding: var(--space-3);
+  border-radius: var(--radius-m);
+  background: var(--grey-50);
+  color: var(--grey-600);
+  font-size: 13px;
+}

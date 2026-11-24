@@ -1,0 +1,189 @@
+/* ---------- Event editor ---------- */
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+.sectionTitle {
+  margin-top: var(--space-2);
+  font-size: 17px;
+  font-weight: 700;
+}
+.session {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+}
+.sessionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+}
+.timeRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: var(--space-2);
+  align-items: end;
+}
+.note {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-m);
+  background: var(--grey-50);
+  color: var(--grey-600);
+  font-size: 13px;
+}
+.stack {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* ---------- Order card ---------- */
+.order {
+  border-bottom: 1px solid var(--line);
+}
+.order:last-child {
+  border-bottom: 0;
+}
+.orderHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 64px;
+  padding: var(--space-3) 0;
+}
+.orderMain {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.orderTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 15px;
+  font-weight: 700;
+}
+.orderSub {
+  overflow: hidden;
+  color: var(--fg-tertiary);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.orderSide {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.orderMeta {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  margin-bottom: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-m);
+  background: var(--grey-50);
+  color: var(--grey-600);
+  font-size: 13px;
+  word-break: break-all;
+}
+.chevron {
+  transition: transform var(--dur-base) var(--ease);
+}
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------- Search ---------- */
+.results {
+  display: grid;
+  max-height: 50dvh;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+.results li {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+.results small {
+  color: var(--fg-tertiary);
+}
+.empty {
+  padding: var(--space-8) 0;
+  color: var(--fg-tertiary);
+  text-align: center;
+}
+
+/* ---------- Check-in ---------- */
+.checkinResult {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-m);
+  background: var(--wash-green);
+  color: var(--green-500);
+  font-weight: 600;
+}
+.checkinError {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-m);
+  background: var(--wash-red);
+  color: var(--red-500);
+  font-weight: 500;
+}
+.inline {
+  display: flex;
+  gap: var(--space-2);
+  align-items: end;
+}
+.inline > :first-child {
+  flex: 1;
+}
+
+/* ---------- Seat order info ---------- */
+.infoList {
+  display: grid;
+  margin: var(--space-2) 0 0;
+}
+.infoList div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+.infoList dt {
+  color: var(--fg-tertiary);
+}
+.infoList dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ---------- Login ---------- */
+.login {
+  display: grid;
+  gap: var(--space-4);
+  width: min(100%, 400px);
+  margin: 12vh auto 0;
+  padding: var(--space-6);
+  text-align: center;
+}
+.login h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.login p {
+  color: var(--fg-secondary);
+}
