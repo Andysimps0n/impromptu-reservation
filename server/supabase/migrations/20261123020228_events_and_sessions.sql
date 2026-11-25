@@ -46,4 +46,4 @@ from show,
        (1, '2026-11-21 20:00+09'),
        (2, '2026-11-22 15:00+09'),
        (3, '2026-11-22 21:00+09')
-     ) as s (sort_order, starts_at);
+     ) as s (sort_order, starts_at);   
