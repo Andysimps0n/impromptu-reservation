@@ -7,8 +7,10 @@
  */
 import { getDb, randomCode, randomId, randomToken, resetDb, saveDb } from './mock-db';
 import { MAX_SELECTED_SEATS, STAFF_ROW, seatCount, seatNumber, seatRow, sortSeats } from './seats';
-import { phoneDigits } from './format';
+import { phoneDigits, sessionLabels } from './format';
 import { HOLD_MINUTES } from './content';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 const LATENCY = 250;
 const wait = () => new Promise(resolve => setTimeout(resolve, LATENCY));
@@ -45,6 +47,8 @@ function eventView(db, event) {
     };
   });
   const showIds = sessions.map(s => s.id);
+
+
   return {
     ...event,
     sessions,
@@ -67,12 +71,26 @@ const ticketsOf = (db, bookingId) => db.tickets.filter(t => t.bookingId === book
 // Audience
 // ---------------------------------------------------------------------------------------------
 
-/** GET /api/event → published event with sessions, or null */
+/**
+ * GET /api/event → published event with sessions, or null (real server).
+ * The server sends raw data (numeric ids, startsAt). Here we add what the UI needs:
+ * ids as strings (the rest of the mock layer and URL params use strings) and the
+ * Korean dateLabel / timeLabel derived from startsAt.
+ */
 export async function getEvent() {
-  await wait();
-  const db = getDb();
-  const event = publishedEvent(db);
-  return event ? clone(eventView(db, event)) : null;
+  const res = await fetch(`${API_URL}/api/event`);
+  if (!res.ok) throw new Error(`서버가 ${res.status} 응답을 보냈어요`);
+  const event = await res.json();
+  if (!event) return null;
+  return {
+    ...event,
+    id: String(event.id),
+    sessions: event.sessions.map(session => ({
+      ...session,
+      id: String(session.id),
+      ...sessionLabels(session.startsAt),
+    })),
+  };
 }
 
 /** GET /api/seats?show=:id → { seats: { B01: 'sold' | 'held' | 'reserved' }, bookingOpen } */
@@ -404,7 +422,6 @@ export async function checkIn(input, showId) {
 }
 
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 export async function getServerHealth() {
   const res = await fetch(`${API_URL}/health`);
   if (!res.ok) throw new Error(`서버가 ${res.status} 응답을 보냈어요`);

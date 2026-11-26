@@ -1,0 +1,1 @@
+alter table events add column booking_open boolean not null default false;

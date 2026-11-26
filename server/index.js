@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors'
 import checkHealth from './routes/checkHealth.js'
 import rows from './routes/rows.js'
+import events from './routes/events.js'
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -17,6 +18,7 @@ app.use(cors({
 
 app.use("/health", checkHealth);
 app.use("/rows", rows);
+app.use("/api/event", events)
 
 app.use((req,res)=>{
   res.status(404).json({error : "Not Found!"})

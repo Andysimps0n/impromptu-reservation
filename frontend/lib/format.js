@@ -33,6 +33,15 @@ export const timeLabel = value => {
   return `${h < 12 ? '오전' : '오후'} ${h % 12 || 12}시${m ? ` ${m}분` : ''}`;
 };
 
+/** ISO timestamp → { dateLabel: "2026년 11월 21일 토요일", timeLabel: "오후 8시" } in Seoul time */
+export const sessionLabels = startsAt => {
+  if (!startsAt) return { dateLabel: '', timeLabel: '' };
+  const when = new Date(startsAt);
+  const date = when.toLocaleDateString('sv-SE', { timeZone: 'Asia/Seoul' }); // "2026-11-21"
+  const time = when.toLocaleTimeString('en-GB', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }); // "20:00"
+  return { dateLabel: dateLabel(date), timeLabel: timeLabel(time) };
+};
+
 const seoulParts = startsAt =>
   Object.fromEntries(
     new Intl.DateTimeFormat('en-US', {
